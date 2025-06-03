@@ -1,37 +1,37 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Mail, Github, Linkedin, MessageCircle } from "lucide-react"
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Mail, Github, Linkedin, MessageCircle } from "lucide-react";
 
 export function ContactCard() {
   const contactInfo = [
     {
       icon: <Mail className="w-5 h-5" />,
-      label: "Email",
-      value: "grace.yuen@example.com",
-      href: "mailto:grace.yuen@example.com",
+      label: "School Email",
+      value: "gracetyy@connect.hku.hk",
+      href: "mailto:gracetyy@connect.hku.hk",
+    },
+    {
+      icon: <Mail className="w-5 h-5" />,
+      label: "Personal Email",
+      value: "tinyan.yuen@gmail.com",
+      href: "mailto:tinyan.yuen@gmail.com",
     },
     {
       icon: <Linkedin className="w-5 h-5" />,
       label: "LinkedIn",
-      value: "linkedin.com/in/graceyuen",
-      href: "https://linkedin.com/in/graceyuen",
+      value: "@gracetyy",
+      href: "https://linkedin.com/in/gracetyy",
     },
     {
       icon: <Github className="w-5 h-5" />,
       label: "GitHub",
-      value: "github.com/graceyuen",
-      href: "https://github.com/graceyuen",
+      value: "@gracetyy",
+      href: "https://github.com/gracetyy",
     },
-    {
-      icon: <MessageCircle className="w-5 h-5" />,
-      label: "Discord",
-      value: "graceyuen#1234",
-      href: "#",
-    },
-  ]
+  ];
 
   return (
     <motion.div
@@ -67,7 +67,8 @@ export function ContactCard() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              I'm always open to discussing new opportunities and interesting projects.
+              I'm always open to discussing new opportunities and interesting
+              projects.
             </motion.p>
           </div>
 
@@ -82,7 +83,9 @@ export function ContactCard() {
                 <Button
                   variant="outline"
                   className="w-full justify-start p-6 h-auto hover:bg-accent/80 dark:hover:bg-gray-800/80 transition-all duration-300 group"
-                  onClick={() => contact.href !== "#" && window.open(contact.href, "_blank")}
+                  onClick={() =>
+                    contact.href !== "#" && window.open(contact.href, "_blank")
+                  }
                 >
                   <div className="flex items-center gap-4">
                     <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors duration-300">
@@ -90,7 +93,9 @@ export function ContactCard() {
                     </div>
                     <div className="text-left">
                       <div className="font-medium">{contact.label}</div>
-                      <div className="text-sm text-muted-foreground">{contact.value}</div>
+                      <div className="text-sm text-muted-foreground">
+                        {contact.value}
+                      </div>
                     </div>
                   </div>
                 </Button>
@@ -106,13 +111,19 @@ export function ContactCard() {
             transition={{ duration: 0.6, delay: 0.8 }}
           >
             <div className="relative w-32 h-32">
-              <svg className="w-full h-full animate-spin-slow" viewBox="0 0 100 100">
+              <svg
+                className="w-full h-full animate-spin-slow"
+                viewBox="0 0 100 100"
+              >
                 <defs>
-                  <path id="circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
+                  <path
+                    id="circle"
+                    d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+                  />
                 </defs>
                 <text className="text-xs fill-current">
                   <textPath href="#circle" className="tracking-widest">
-                    GRACE YUEN • GRACE YUEN •
+                    GRACE YUEN • YUEN TIN YAN •
                   </textPath>
                 </text>
               </svg>
@@ -126,5 +137,5 @@ export function ContactCard() {
         </CardContent>
       </Card>
     </motion.div>
-  )
+  );
 }
