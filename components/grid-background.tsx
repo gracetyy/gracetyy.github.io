@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 
 export function GridBackground() {
   const [isDark, setIsDark] = useState(false)
+  const [dotPositions, setDotPositions] = useState<Array<{ left: number; top: number; duration: number; delay: number }>>([])
 
   useEffect(() => {
     // Detect dark mode using matchMedia
@@ -15,6 +16,15 @@ export function GridBackground() {
     // Also listen for class changes (theme toggle)
     const observer = new MutationObserver(update)
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    // Generate random dot positions only on client
+    setDotPositions(
+      Array.from({ length: 20 }).map(() => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        duration: 3 + Math.random() * 2,
+        delay: Math.random() * 2,
+      }))
+    )
     return () => {
       match.removeEventListener('change', update)
       observer.disconnect()
@@ -66,29 +76,29 @@ export function GridBackground() {
         }}
       />
 
-      {/* Subtle animated dots */}
+      {/* Subtle animated dots - only render on client after mount */}
       <motion.div
         className="absolute inset-0"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
       >
-        {Array.from({ length: 20 }).map((_, i) => (
+        {dotPositions.map((dot, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-primary/20 rounded-full"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${dot.left}%`,
+              top: `${dot.top}%`,
             }}
             animate={{
               opacity: [0.2, 0.8, 0.2],
               scale: [1, 1.5, 1],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: dot.duration,
               repeat: Number.POSITIVE_INFINITY,
-              delay: Math.random() * 2,
+              delay: dot.delay,
             }}
           />
         ))}

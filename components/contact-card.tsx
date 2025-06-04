@@ -53,12 +53,12 @@ export function ContactCard() {
         <CardContent className="p-12 relative">
           <div className="text-center mb-12">
             <motion.h2
-              className="text-4xl md:text-5xl font-bold mb-4"
+              className="text-3xl md:text-4xl font-bold mb-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Let's get in touch
+              Contact Info
             </motion.h2>
 
             <motion.p

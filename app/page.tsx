@@ -43,16 +43,49 @@ export default function Portfolio() {
   }
 
 
-  const experiences = [
+    const experiences = [
     {
       type: "internship" as const,
       title: "IT Wagering Solutions Summer Intern",
       company: "Hong Kong Jockey Club",
       period: "Jul - Aug 2025 (Upcoming)",
       description:
-        "",
+        "Expected to assist with wagering system maintenance and optimization to support transaction processing improvements under senior developer guidance.",
+    },
+    {
+      type: "internship" as const,
+      title: "Business Development Intern (Part-time)",
+      company: "Versitech Limited / Technology Transfer Office (TTO), HKU",
+      period: "Sep 2024 - Jun 2025",
+      description:
+        "Analyzed invention manuscripts and assessed commercial viability to identify global business opportunities, and built a comprehensive documentation website for the Versitech e-Form processor GUI application using the Docsify framework.",
+    },
+    {
+      type: "internship" as const,
+      title: "Student Research Assistant Intern",
+      company: "Department of Data and Systems Engineering (DASE), HKU",
+      period: "Dec 2024 - Jan 2025",
+      description:
+        "Collected 7.5+ hours of motion capture data from 15 participants to train AI models for camera-free gesture recognition and demonstrated the system to 100+ industry partners.",
+    },
+    {
+      type: "internship" as const,
+      title: "Student Teaching Assistant for ENGG1330 Computer Programming I",
+      company: "School of Computing & Data Science, HKU",
+      period: "Sep - Nov 2024",
+      description:
+        "Selected as one of 38 tutors from 535 students to host weekly Python tutorial sessions for first-year engineering students. Provided comprehensive guidance on fundamental programming concepts including syntax, control statements, functions, and data types through teaching materials and active participation in course forums.",
+    },
+    {
+      type: "internship" as const,
+      title: "IT Software Technician Intern",
+      company: "Yew Chung Education Foundation",
+      period: "Jun - Aug 2024",
+      description:
+        "Coordinated the deployment of the Asset Management and Tracking System (AMTS) across 10 campuses for 18,000+ assets.",
     },
   ]
+
 
   
 
@@ -61,6 +94,8 @@ export default function Portfolio() {
       title: "The Hidden Eden",
       description: "An immersive 3D artwork designed for exploration in virtual reality",
       technologies: ["Blender", "Meta Quest 3", "Gravity Sketch"],
+      prototypeUrl: "",
+      githubUrl: "https://github.com/gracetyy/CCST9049_ProjectII_Group2D3",
       details:
         "Created as a CCST9049 group project, where I was responsible for creating the whole 3D world model. Players can view and interact with the 3D world in Gravity Sketch on Meta Quest 3, such as painting on the easel, grabbing the food, and diving into the underwater world.",
     },
@@ -95,7 +130,7 @@ export default function Portfolio() {
     {
       id: 5,
       title: "Baby Chat",
-      description: "AI-powered Parenting App made for the GenAI Hackathon for Social Good 2023 hosted by HKU",
+      description: "AI-powered Parenting App made for the GenAI Hackathon for Social Good 2023",
       technologies: ["OpenAI API", "Embeddings", "RAG", "Sketch", "GitHub"],
       videoUrl: "https://the-bithub.com/BabyChatDemoVid",
       details:
@@ -125,8 +160,8 @@ export default function Portfolio() {
             className="text-center z-10 px-4"
           >
             <motion.h1
-              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 relative"
-              style={{ fontFamily: "Inter, sans-serif" }}
+              className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 relative leading-tight md:leading-[1.1] lg:leading-[1.08] px-2 md:px-8"
+              style={{ fontFamily: "Inter, sans-serif", wordBreak: "keep-all", whiteSpace: "pre-line" }}
             >
               Hey👋, I'm{" "}
               <span className="relative inline-block">
@@ -192,7 +227,7 @@ export default function Portfolio() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-3xl md:text-4xl font-bold text-center mb-16"
+            className="text-4xl md:text-5xl font-bold text-center mb-16"
           >
             About Me
           </motion.h2>
@@ -258,7 +293,7 @@ export default function Portfolio() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-3xl md:text-4xl font-bold text-center mb-16"
+            className="text-4xl md:text-5xl font-bold text-center mb-16"
           >
             Experience
           </motion.h2>
@@ -272,7 +307,7 @@ export default function Portfolio() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-3xl md:text-4xl font-bold text-center mb-16"
+            className="text-4xl md:text-5xl font-bold text-center mb-16"
           >
             Featured Projects
           </motion.h2>
@@ -292,9 +327,9 @@ export default function Portfolio() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-3xl md:text-4xl font-bold text-center mb-16"
+            className="text-4xl md:text-5xl font-bold text-center mb-16"
           >
-            Let's Connect
+            Let's Get in Touch
           </motion.h2>
 
           <ContactCard />
@@ -307,10 +342,13 @@ export default function Portfolio() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
+              whileHover={{ scale: 1.15, boxShadow: "0 6px 24px 0 rgba(0,0,0,0.18)" }}
+              whileTap={{ scale: 0.92, rotate: -12 }}
               onClick={scrollToTop}
               className={`fixed z-[60] p-3 bg-primary text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110
                 ${isMobile ? 'bottom-24 right-4' : 'bottom-20 right-8'}`}
               style={isMobile ? { marginBottom: '0', marginRight: '0' } : {}}
+              aria-label="Back to Top"
             >
               <ChevronUp className="w-5 h-5" />
             </motion.button>

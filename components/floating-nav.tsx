@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
+import { useIsMobile } from "@/components/ui/use-mobile"
 
 const navItems = [
 	{ name: "Home", href: "#home" },
@@ -13,6 +14,7 @@ const navItems = [
 ]
 
 export function FloatingNav({ mobileOffset = false }: { mobileOffset?: boolean } = {}) {
+	const isMobile = useIsMobile();
 	const [isAtBottom, setIsAtBottom] = useState(false)
 	const [activeSection, setActiveSection] = useState("home")
 	const [isFloating, setIsFloating] = useState(true)
@@ -83,10 +85,12 @@ export function FloatingNav({ mobileOffset = false }: { mobileOffset?: boolean }
 									variant="ghost"
 									size="sm"
 									onClick={() => scrollToSection(item.href)}
-									className={`relative transition-all duration-300 touch-manipulation active:bg-accent/80 hover:bg-accent/80 text-xs md:text-sm px-2 md:px-3 ${
+									className={`relative transition-all duration-300 touch-manipulation text-xs md:text-sm px-2 md:px-3 ${
 										activeSection === item.href.slice(1)
 											? "text-primary"
-											: "text-muted-foreground hover:text-foreground"
+											: "text-muted-foreground"
+									}${
+									!isMobile ? " hover:bg-accent/80 hover:text-foreground active:bg-accent/80" : ""
 									}`}
 									tabIndex={0}
 									// Remove hover/active styles on touch devices
@@ -94,18 +98,22 @@ export function FloatingNav({ mobileOffset = false }: { mobileOffset?: boolean }
 										e.currentTarget.classList.remove("hover:bg-accent", "active:bg-accent/80")
 									}}
 								>
-									<motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+									<motion.span whileHover={!isMobile ? { scale: 1.05 } : {}} whileTap={{ scale: 0.95 }}>
 										{item.name}
 									</motion.span>
 
 									{activeSection === item.href.slice(1) && (
-										<motion.div
-											className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
-											initial={false}
-											transition={{ ease: "easeInOut", duration: 0.35 }}
-											style={{ y: 0, x: 0 }}
-											{...(isFloating ? { layoutId: item.name } : {})}
-										/>
+										isFloating ? (
+											<motion.div
+												className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
+												initial={false}
+												transition={{ ease: "easeInOut", duration: 0.35 }}
+												style={{ y: 0, x: 0 }}
+												layoutId={item.name}
+											/>
+										) : (
+											<div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full" />
+										)
 									)}
 								</Button>
 							</motion.div>

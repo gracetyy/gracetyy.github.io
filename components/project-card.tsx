@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Github, X, Video, PenTool, FileText } from "lucide-react"
+import { ExternalLink, Github, X, CirclePlay, Box, Presentation } from "lucide-react"
 import Image from "next/image"
 
 interface Project {
@@ -16,10 +16,10 @@ interface Project {
   technologies?: string[]
   liveUrl?: string
   githubUrl?: string
-  details: string
   videoUrl?: string
   prototypeUrl?: string
   pitchDeckUrl?: string
+  details: string
 }
 
 interface ProjectCardProps {
@@ -106,7 +106,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                   }}
                   className="flex-1"
                 >
-                  <Video className="w-3 h-3 mr-1" />
+                  <CirclePlay className="w-3 h-3 mr-1" />
                   Video
                 </Button>
               )}
@@ -120,7 +120,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                   }}
                   className="flex-1"
                 >
-                  <PenTool className="w-3 h-3 mr-1" />
+                  <Box className="w-3 h-3 mr-1" />
                   Prototype
                 </Button>
               )}
@@ -134,7 +134,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                   }}
                   className="flex-1"
                 >
-                  <FileText className="w-3 h-3 mr-1" />
+                  <Presentation className="w-3 h-3 mr-1" />
                   Pitch Deck
                 </Button>
               )}
@@ -183,7 +183,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 
               <div className="p-6">
                 <h2 className="text-2xl font-bold mb-4">{project.title}</h2>
-
+                <p className="text-muted-foreground mb-4">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies && project.technologies.length > 0 && project.technologies.map((tech) => (
                     <Badge key={tech} variant="secondary">
@@ -191,7 +191,6 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                     </Badge>
                   ))}
                 </div>
-
                 <p className="text-muted-foreground mb-6 leading-relaxed">{project.details}</p>
 
                 <div className="flex gap-4">
@@ -209,19 +208,19 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                   )}
                   {project.videoUrl && project.videoUrl !== "" && (
                     <Button variant="outline" onClick={() => window.open(project.videoUrl, "_blank")} className="flex-1">
-                      <Video className="w-4 h-4 mr-2" />
+                      <CirclePlay className="w-4 h-4 mr-2" />
                       Video
                     </Button>
                   )}
                   {project.prototypeUrl && project.prototypeUrl !== "" && (
                     <Button variant="outline" onClick={() => window.open(project.prototypeUrl, "_blank")} className="flex-1">
-                      <PenTool className="w-4 h-4 mr-2" />
+                      <Box className="w-4 h-4 mr-2" />
                       Prototype
                     </Button>
                   )}
                   {project.pitchDeckUrl && project.pitchDeckUrl !== "" && (
                     <Button variant="outline" onClick={() => window.open(project.pitchDeckUrl, "_blank")} className="flex-1">
-                      <FileText className="w-4 h-4 mr-2" />
+                      <Presentation className="w-4 h-4 mr-2" />
                       Pitch Deck
                     </Button>
                   )}

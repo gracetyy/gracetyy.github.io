@@ -2,16 +2,19 @@
 
 import { motion, AnimatePresence } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
-import { Calendar, Briefcase, GraduationCap, Trophy, Code, X } from "lucide-react"
+import { Calendar, Briefcase, GraduationCap, Trophy, Code, X, Triangle } from "lucide-react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 
 interface Experience {
   type: "work" | "internship" | "project" | "hackathon"
   title: string
   company: string
   period: string
-  description: string
+  description: string // short version
+  longDescription?: string | string[] // long version, optional, can be string or string[]
+  skills?: string[] // new: list of skills/tools used
 }
 
 interface TimelineProps {
@@ -54,24 +57,22 @@ export function Timeline({ experiences }: TimelineProps) {
       {/* Vertical line - positioned differently on mobile vs desktop */}
       <div className="absolute left-8 md:left-1/2 md:transform md:-translate-x-1/2 w-0.5 h-full bg-border" />
 
-      <div className="space-y-8 md:space-y-12">
+      {/* Custom alternating layout for desktop: overlap cards vertically */}
+      <div className="flex flex-col">
         {experiences.map((experience, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="relative flex items-center md:items-center"
+            className={`relative flex items-center md:items-center ${index !== experiences.length - 1 ? 'mb-8 md:mb-[-96px]' : ''}`}
           >
-            {/* Timeline dot/triangle */}
             <div
               className="absolute top-1/2 -translate-y-1/2 left-8 md:left-1/2 md:transform md:-translate-x-1/2 z-10"
             >
               {/* Mobile: right-pointed triangle, Desktop: circle */}
               <span className="block md:hidden">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="3,2 13,8 3,14" fill="currentColor" className="text-primary opacity-40" />
-                </svg>
+                <Triangle className="w-4 h-4 text-border fill-current rotate-90" fill="currentColor" />
               </span>
               <span className="hidden md:block">
                 <span className="w-4 h-4 bg-primary rounded-full border-4 border-background block" />
@@ -91,6 +92,21 @@ export function Timeline({ experiences }: TimelineProps) {
 
 function ExperienceCard({ experience, index }: { experience: Experience; index: number }) {
   const [isExpanded, setIsExpanded] = useState(false)
+
+  // Helper to render longDescription as bullet points if it's an array
+  const renderLongDescription = () => {
+    if (!experience.longDescription) return <p className="text-foreground leading-relaxed text-xs md:text-sm break-words">{experience.description}</p>
+    if (Array.isArray(experience.longDescription)) {
+      return (
+        <ul className="list-disc pl-5 space-y-1 text-foreground text-xs md:text-sm">
+          {experience.longDescription.map((item, i) => (
+            <li key={i}>{item}</li>
+          ))}
+        </ul>
+      )
+    }
+    return <p className="text-foreground leading-relaxed text-xs md:text-sm break-words">{experience.longDescription}</p>
+  }
 
   return (
     <>
@@ -117,6 +133,15 @@ function ExperienceCard({ experience, index }: { experience: Experience; index: 
               <span className="break-words">{experience.period}</span>
             </div>
           </div>
+
+          {/* Skills badges (if any) */}
+          {experience.skills && experience.skills.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-2">
+              {experience.skills.map((skill) => (
+                <Badge key={skill} variant="secondary" className="text-xs">{skill}</Badge>
+              ))}
+            </div>
+          )}
 
           <p className="text-foreground leading-relaxed text-xs md:text-sm break-words">{experience.description}</p>
         </CardContent>
@@ -156,14 +181,23 @@ function ExperienceCard({ experience, index }: { experience: Experience; index: 
                 <h2 className="text-2xl font-bold mb-2">{experience.title}</h2>
                 <h3 className="text-xl text-muted-foreground mb-4">{experience.company}</h3>
 
-                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
+                <div className="flex flex-col gap-1 text-xs md:text-sm text-muted-foreground mb-4">
                   <div className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    {experience.period}
+                    <Calendar className="w-3 h-3 flex-shrink-0" />
+                    <span className="break-words">{experience.period}</span>
                   </div>
                 </div>
 
-                <p className="text-foreground leading-relaxed">{experience.description}</p>
+                {/* Skills badges (if any) */}
+                {experience.skills && experience.skills.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {experience.skills.map((skill) => (
+                      <Badge key={skill} variant="secondary">{skill}</Badge>
+                    ))}
+                  </div>
+                )}
+
+                {renderLongDescription()}
               </div>
             </motion.div>
           </motion.div>
