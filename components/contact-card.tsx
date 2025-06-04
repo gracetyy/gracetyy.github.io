@@ -51,7 +51,7 @@ export function ContactCard() {
         />
 
         <CardContent className="p-12 relative">
-          <div className="text-center mb-12">
+          {/* <div className="text-center mb-12">
             <motion.h2
               className="text-3xl md:text-4xl font-bold mb-4"
               initial={{ opacity: 0, y: 20 }}
@@ -70,7 +70,7 @@ export function ContactCard() {
               I'm always open to discussing new opportunities and interesting
               projects.
             </motion.p>
-          </div>
+          </div> */}
 
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             {contactInfo.map((contact, index) => (
@@ -122,16 +122,21 @@ export function ContactCard() {
                   />
                 </defs>
                 <text className="text-xs fill-current">
-                  <textPath href="#circle" className="tracking-widest">
+                  <textPath
+                    href="#circle"
+                    className="tracking-widest"
+                    textLength="230"
+                    lengthAdjust="spacingAndGlyphs"
+                  >
                     GRACE YUEN • YUEN TIN YAN •
                   </textPath>
                 </text>
               </svg>
-              <div className="absolute inset-0 flex items-center justify-center">
+              {/* <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
                   <Mail className="w-6 h-6 text-primary-foreground" />
                 </div>
-              </div>
+              </div> */}
             </div>
           </motion.div>
         </CardContent>

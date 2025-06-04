@@ -1,49 +1,61 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useRef } from "react"
-import { motion, useScroll, AnimatePresence } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ChevronUp, CodeXml, Palette, Server, Settings, Globe, ArrowRight, LucideSettings } from "lucide-react"
-import { ThemeProvider } from "@/components/theme-provider"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { FloatingNav } from "@/components/floating-nav"
-import { Timeline } from "@/components/timeline"
-import { ProjectCard } from "@/components/project-card"
-import { ContactCard } from "@/components/contact-card"
-import { GridBackground } from "@/components/grid-background"
-import { useIsMobile } from "@/components/ui/use-mobile"
+import { useState, useEffect, useRef } from "react";
+import { motion, useScroll, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  ChevronUp,
+  CodeXml,
+  Palette,
+  Server,
+  Settings,
+  Globe,
+  ArrowRight,
+  LucideSettings,
+} from "lucide-react";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { FloatingNav } from "@/components/floating-nav";
+import { Timeline } from "@/components/timeline";
+import { ProjectCard } from "@/components/project-card";
+import { ContactCard } from "@/components/contact-card";
+import { GridBackground } from "@/components/grid-background";
+import { useIsMobile } from "@/components/ui/use-mobile";
 
 export default function Portfolio() {
-  const [showBackToTop, setShowBackToTop] = useState(false)
-  const { scrollY } = useScroll()
-  const heroRef = useRef<HTMLElement>(null)
-  const isMobile = useIsMobile()
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const { scrollY } = useScroll();
+  const heroRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowBackToTop(window.scrollY > window.innerHeight)
-    }
+      setShowBackToTop(window.scrollY > window.innerHeight);
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const skillsets = {
-      "Programming": ["Python", "C++", "Java", "R", "Bash"],
-      "DevOps & Tools": ["Linux CLI", "Git", "GitHub"],
-      "Web Development": ["HTML", "CSS", "JavaScript", "TypeScript"],
-      "Cloud & Automation": ["Google Cloud Platform", "Microsoft Office 365", "Power Automate"],
-      "Design & Media": ["Blender", "CapCut", "Canva", "Figma"],
-  }
+    Programming: ["Python", "C++", "Java", "R", "Bash"],
+    "DevOps & Tools": ["Linux CLI", "Git", "GitHub"],
+    "Web Development": ["HTML", "CSS", "JavaScript", "TypeScript"],
+    "Cloud & Automation": [
+      "Google Cloud Platform",
+      "Microsoft Office 365",
+      "Power Automate",
+    ],
+    "Design & Media": ["Blender", "CapCut", "Canva", "Figma"],
+  };
 
-
-    const experiences = [
+  const experiences = [
     {
       type: "internship" as const,
       title: "IT Wagering Solutions Summer Intern",
@@ -84,15 +96,14 @@ export default function Portfolio() {
       description:
         "Coordinated the deployment of the Asset Management and Tracking System (AMTS) across 10 campuses for 18,000+ assets.",
     },
-  ]
+  ];
 
-
-  
-
-  const projects = [    {
+  const projects = [
+    {
       id: 1,
       title: "The Hidden Eden",
-      description: "An immersive 3D artwork designed for exploration in virtual reality",
+      description:
+        "An immersive 3D artwork designed for exploration in virtual reality",
       technologies: ["Blender", "Meta Quest 3", "Gravity Sketch"],
       prototypeUrl: "",
       githubUrl: "https://github.com/gracetyy/CCST9049_ProjectII_Group2D3",
@@ -102,7 +113,8 @@ export default function Portfolio() {
     {
       id: 2,
       title: "Turn-based C++ Terminal Game",
-      description: "A turn-based terminal adventure game where you guide a lost explorer to safety while escaping from hunters' attack",
+      description:
+        "A turn-based terminal adventure game where you guide a lost explorer to safety while escaping from hunters' attack",
       technologies: ["C++", "Bash", "GitHub", "GitHub Action"],
       videoUrl: "https://the-bithub.com/ENGG1340ProjectDemo",
       details:
@@ -111,7 +123,8 @@ export default function Portfolio() {
     {
       id: 3,
       title: "Xin Sheng 馨聲",
-      description: "AI companion app that addresses elderly loneliness through emotional recognition, personalized interactions, and community-building features",
+      description:
+        "AI companion app that addresses elderly loneliness through emotional recognition, personalized interactions, and community-building features",
       technologies: ["GenAI", "Figma"],
       prototypeUrl: "https://the-bithub.com/XinShengFigma",
       pitchDeckUrl: "https://the-bithub.com/XinShengPitchDeck",
@@ -121,7 +134,8 @@ export default function Portfolio() {
     {
       id: 4,
       title: "Text-based terminal game inspired by 2048",
-      description: "Selected as one of the Top 10 Featured Projects among 107 groups",
+      description:
+        "Selected as one of the Top 10 Featured Projects among 107 groups",
       technologies: ["Python", "Curses Library"],
       videoUrl: "https://the-bithub.com/ENGG1330ProjectDemo",
       details:
@@ -130,14 +144,14 @@ export default function Portfolio() {
     {
       id: 5,
       title: "Baby Chat",
-      description: "AI-powered Parenting App made for the GenAI Hackathon for Social Good 2023",
+      description:
+        "AI-powered Parenting App made for the GenAI Hackathon for Social Good 2023",
       technologies: ["OpenAI API", "Embeddings", "RAG", "Sketch", "GitHub"],
       videoUrl: "https://the-bithub.com/BabyChatDemoVid",
       details:
         "Engaged in collaborative work with a diverse team of participants, including master's and PhD students. Received invaluable mentorship provided by professors and judges to develop a GenAI-powered chatbot app for newborn parents.",
     },
-  ]
-
+  ];
 
   return (
     <ThemeProvider>
@@ -149,10 +163,9 @@ export default function Portfolio() {
         <motion.section
           ref={heroRef}
           id="home"
-          className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+          className="relative min-h-[60vh] flex flex-col items-center justify-center overflow-hidden pt-24"
         >
           <GridBackground />
-
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -161,7 +174,11 @@ export default function Portfolio() {
           >
             <motion.h1
               className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 relative leading-tight md:leading-[1.1] lg:leading-[1.08] px-2 md:px-8"
-              style={{ fontFamily: "Inter, sans-serif", wordBreak: "keep-all", whiteSpace: "pre-line" }}
+              style={{
+                fontFamily: "Inter, sans-serif",
+                wordBreak: "keep-all",
+                whiteSpace: "pre-line",
+              }}
             >
               Hey👋, I'm{" "}
               <span className="relative inline-block">
@@ -173,19 +190,23 @@ export default function Portfolio() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-6"
+              className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-2"
             >
               <Button
                 size="lg"
-                className="hero-btn min-w-[160px]"
-                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                className="hero-btn min-w-[160px] dark:bg-primary/95 dark:hover:bg-primary/100"
+                onClick={() =>
+                  document
+                    .getElementById("contact")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
               >
                 Contact Me
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                className="hero-btn min-w-[160px] flex items-center justify-center group"
+                className="hero-btn min-w-[160px] flex items-center justify-center group border-2 border-primary dark:border-primary/80 dark:bg-gray-900/95"
                 onClick={async (e) => {
                   if (isMobile) {
                     // Animate the arrow rotation before scrolling
@@ -195,20 +216,27 @@ export default function Portfolio() {
                       await new Promise((resolve) => setTimeout(resolve, 200));
                       arrow.classList.remove("-rotate-45");
                     }
-                    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+                    document
+                      .getElementById("about")
+                      ?.scrollIntoView({ behavior: "smooth" });
                   } else {
-                    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+                    document
+                      .getElementById("about")
+                      ?.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
               >
                 <span>About Me</span>
                 <span className="ml-2 flex items-center">
-                  <ArrowRight id="about-arrow" className="w-4 h-4 transition-transform duration-200 group-hover:-rotate-45" />
+                  <ArrowRight
+                    id="about-arrow"
+                    className="w-4 h-4 transition-transform duration-200 group-hover:-rotate-45"
+                  />
                 </span>
               </Button>
             </motion.div>
 
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.6 }}
@@ -217,7 +245,7 @@ export default function Portfolio() {
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse" />
                 Available for new projects
               </div>
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         </motion.section>
 
@@ -242,11 +270,14 @@ export default function Portfolio() {
                 <CardContent className="p-8">
                   <h3 className="text-xl font-semibold mb-4">Hello there!</h3>
                   <p className="text-muted-foreground leading-relaxed mb-4">
-                    I'm a passionate Year 2 Computer Science student at the University of Hong Kong. I love turning complex problems into simple, beautiful, and intuitive solutions.
-
+                    I'm a passionate Year 2 Computer Science student at the
+                    University of Hong Kong. I love turning complex problems
+                    into simple, beautiful, and intuitive solutions.
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
-                    When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or making 3D models and games.
+                    When I'm not coding, you can find me exploring new
+                    technologies, contributing to open-source projects, or
+                    making 3D models and games.
                   </p>
                 </CardContent>
               </Card>
@@ -261,25 +292,41 @@ export default function Portfolio() {
                 <CardContent className="p-8">
                   <h3 className="text-xl font-semibold mb-6">Skillsets</h3>
                   <div className="space-y-6">
-                    {Object.entries(skillsets).map(([category, technologies]) => (
-                      <div key={category}>
-                        <div className="flex items-center gap-2 mb-3">
-                          {category === "Programming" && <CodeXml className="w-4 h-4" />}
-                          {category === "DevOps & Tools" && <Settings className="w-4 h-4" />}
-                          {category === "Web Development" && <Globe className="w-4 h-4" />}
-                          {category === "Cloud & Automation" && <Server className="w-4 h-4" />}
-                          {category === "Design & Media" && <Palette className="w-4 h-4" />}
-                          <h4 className="font-medium">{category}</h4>
+                    {Object.entries(skillsets).map(
+                      ([category, technologies]) => (
+                        <div key={category}>
+                          <div className="flex items-center gap-2 mb-3">
+                            {category === "Programming" && (
+                              <CodeXml className="w-4 h-4" />
+                            )}
+                            {category === "DevOps & Tools" && (
+                              <Settings className="w-4 h-4" />
+                            )}
+                            {category === "Web Development" && (
+                              <Globe className="w-4 h-4" />
+                            )}
+                            {category === "Cloud & Enterprise Solutions" && (
+                              <Server className="w-4 h-4" />
+                            )}
+                            {category === "Design & Media" && (
+                              <Palette className="w-4 h-4" />
+                            )}
+                            <h4 className="font-medium">{category}</h4>
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {technologies.map((tech) => (
+                              <Badge
+                                key={tech}
+                                variant="secondary"
+                                className="text-xs"
+                              >
+                                {tech}
+                              </Badge>
+                            ))}
+                          </div>
                         </div>
-                        <div className="flex flex-wrap gap-2">
-                          {technologies.map((tech) => (
-                            <Badge key={tech} variant="secondary" className="text-xs">
-                              {tech}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
+                      )
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -288,7 +335,10 @@ export default function Portfolio() {
         </section>
 
         {/* Experience Section */}
-        <section id="experience" className="py-20 px-6 md:px-8 max-w-6xl mx-auto">
+        <section
+          id="experience"
+          className="py-20 px-6 md:px-8 max-w-6xl mx-auto"
+        >
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -342,12 +392,15 @@ export default function Portfolio() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              whileHover={{ scale: 1.15, boxShadow: "0 6px 24px 0 rgba(0,0,0,0.18)" }}
-              whileTap={{ scale: 0.92, rotate: -12 }}
+              whileHover={{
+                scale: 1.15,
+                boxShadow: "0 6px 24px 0 rgba(0,0,0,0.18)",
+              }}
+              whileTap={{ scale: 0.92 }}
               onClick={scrollToTop}
               className={`fixed z-[60] p-3 bg-primary text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110
-                ${isMobile ? 'bottom-24 right-4' : 'bottom-20 right-8'}`}
-              style={isMobile ? { marginBottom: '0', marginRight: '0' } : {}}
+                ${isMobile ? "bottom-24 right-4" : "bottom-20 right-8"}`}
+              style={isMobile ? { marginBottom: "0", marginRight: "0" } : {}}
               aria-label="Back to Top"
             >
               <ChevronUp className="w-5 h-5" />
@@ -356,5 +409,5 @@ export default function Portfolio() {
         </AnimatePresence>
       </div>
     </ThemeProvider>
-  )
+  );
 }
