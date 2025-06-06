@@ -180,7 +180,14 @@ export default function Portfolio() {
                 whiteSpace: "pre-line",
               }}
             >
-              Hey👋, I'm{" "}
+              Hey
+              <span
+                className="inline-block origin-[70%_70%] animate-wave"
+                role="img"
+                aria-label="waving hand"
+              >
+                👋
+              </span>, I'm{" "}
               <span className="relative inline-block">
                 <span className="text-primary">Grace Yuen</span>
               </span>
@@ -192,6 +199,7 @@ export default function Portfolio() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-2"
             >
+              
               <Button
                 size="lg"
                 className="hero-btn min-w-[160px] dark:bg-primary/95 dark:hover:bg-primary/100"
@@ -206,7 +214,7 @@ export default function Portfolio() {
               <Button
                 variant="outline"
                 size="lg"
-                className="hero-btn min-w-[160px] flex items-center justify-center group border-2 border-primary dark:border-primary/80 dark:bg-gray-900/95"
+                className="hero-btn min-w-[160px] flex items-center justify-center group border-2 border-primary dark:border-primary/80 dark:bg-gray-900/95 dark:hover:bg-gray-800"
                 onClick={async (e) => {
                   if (isMobile) {
                     // Animate the arrow rotation before scrolling
@@ -247,6 +255,48 @@ export default function Portfolio() {
               </div>
             </motion.div> */}
           </motion.div>
+
+          {/* Animated Scroll Down Hint */}
+          <AnimatePresence>
+            {!showBackToTop && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.8, delay: 1 }}
+                className="absolute inset-x-0 mx-auto bottom-2 sm:bottom-8 md:bottom-12 flex flex-col items-center z-20 select-none w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg px-2"
+                style={{ left: '0', right: '0', pointerEvents: 'auto', cursor: 'pointer' }}
+                onClick={() => {
+                  const aboutSection = document.getElementById('about');
+                  if (aboutSection) {
+                    aboutSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                tabIndex={0}
+                aria-label="Scroll down to About section"
+                role="button"
+              >
+                <span className="text-muted-foreground text-sm mb-2 animate-bounce bg-background/80 px-2 rounded">
+                  Scroll down
+                </span>
+                <svg
+                  className="w-6 h-6 text-muted-foreground animate-bounce"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          {/* End Animated Scroll Down Hint */}
         </motion.section>
 
         {/* About Section */}
@@ -381,7 +431,6 @@ export default function Portfolio() {
           >
             Let's Get in Touch
           </motion.h2>
-
           <ContactCard />
         </section>
 

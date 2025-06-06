@@ -94,7 +94,6 @@ body {
 }
 
 .hero-btn, button.hero-btn {
-  /* Stronger font and size for hero buttons */
   font-size: 1.15rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.01em !important;
@@ -102,8 +101,6 @@ body {
   border-width: 2px !important;
   border-radius: 0.75rem !important;
   transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s !important;
-}
-.hero-btn, button.hero-btn {
   background: linear-gradient(90deg, hsl(var(--primary) / 0.92), hsl(var(--primary) / 0.80)) !important;
   color: hsl(var(--primary-foreground)) !important;
   border-color: hsl(var(--primary)) !important;
