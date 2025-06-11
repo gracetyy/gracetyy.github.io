@@ -18,7 +18,7 @@ export const experiences = [
     title: "IT Wagering Solutions Summer Intern",
     company: "Hong Kong Jockey Club",
     period: "Jul - Aug 2025 (Upcoming)",
-    description:
+    shortDescription:
       "Expected to assist with wagering system maintenance and optimization to support transaction processing improvements under senior developer guidance.",
   },
   {
@@ -26,7 +26,7 @@ export const experiences = [
     title: "Business Development Intern (Part-time)",
     company: "Versitech Limited / Technology Transfer Office (TTO), HKU",
     period: "Sep 2024 - Jun 2025",
-    description:
+    shortDescription:
       "Analyzed invention manuscripts and assessed commercial viability to identify global business opportunities, and built a comprehensive documentation website for the Versitech e-Form processor GUI application using the Docsify framework.",
   },
   {
@@ -34,15 +34,16 @@ export const experiences = [
     title: "Student Research Assistant Intern",
     company: "Department of Data and Systems Engineering (DASE), HKU",
     period: "Dec 2024 - Jan 2025",
-    description:
-      "Collected 7.5+ hours of motion capture data from 15 participants to train AI models for camera-free gesture recognition and demonstrated the system to 100+ industry partners.",
+    skills: ["VR Development", "Video Production", "Motion Capture"],
+    shortDescription: "Contributed to the XRCC 3.0 system development and video tutorials.",
+    longDescription: ["Collected 7.5+ hours of motion capture data from 15 participants in a third-person VR environment to train AI computer vision models, enabling full-body gesture recognition without motion capture cameras.", "Demonstrated vCave system and XRCC capabilities to 100+ industry partners and prospective students in total.", "Developed an immersive VR combat game “Zombie Fight” for both headsets and vCave systems using XRCC.", "Produced video tutorials for XRCC 3.0 that introduce buttons, linkage, and creating a weapon that shoots bullets. (https://www.youtube.com/playlist?list=PLVeJmBvfS6ZgpowPKPxVYtatqt_qPfmHT)"]
   },
   {
     type: "internship" as const,
     title: "Student Teaching Assistant for ENGG1330 Computer Programming I",
     company: "School of Computing & Data Science, HKU",
     period: "Sep - Nov 2024",
-    description:
+    shortDescription:
       "Selected as one of 38 tutors from 535 students to host weekly Python tutorial sessions for first-year engineering students. Provided comprehensive guidance on fundamental programming concepts including syntax, control statements, functions, and data types through teaching materials and active participation in course forums.",
   },
   {
@@ -50,7 +51,7 @@ export const experiences = [
     title: "IT Software Technician Intern",
     company: "Yew Chung Education Foundation",
     period: "Jun - Aug 2024",
-    description:
+    shortDescription:
       "Coordinated the deployment of the Asset Management and Tracking System (AMTS) across 10 campuses for 18,000+ assets.",
   },
 ];
@@ -60,9 +61,8 @@ export const projects = [
     id: 1,
     title: "The Hidden Eden",
     description:
-      "An immersive 3D artwork designed for exploration in virtual reality",
+      "An aesthetic 3D artwork of a serene world designed for exploration in VR",
     technologies: ["Blender", "Meta Quest 3", "Gravity Sketch"],
-    prototypeUrl: "",
     githubUrl: "https://github.com/gracetyy/CCST9049_ProjectII_Group2D3",
     details:
       "Created as a CCST9049 group project, where I was responsible for creating the whole 3D world model. Players can view and interact with the 3D world in Gravity Sketch on Meta Quest 3, such as painting on the easel, grabbing the food, and diving into the underwater world.",

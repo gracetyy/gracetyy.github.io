@@ -19,7 +19,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { FloatingNav } from "@/components/floating-nav";
 import { Timeline } from "@/components/timeline";
-import { ProjectCard } from "@/components/project-card";
+import { InfoCard } from "@/components/unified-card";
 import { ContactCard } from "@/components/contact-card";
 import { GridBackground } from "@/components/grid-background";
 import { useIsMobile } from "@/components/ui/use-mobile";
@@ -304,11 +304,25 @@ export default function Portfolio() {
           </motion.h2>
 
           <div className="grid md:grid-cols-2 gap-8 items-stretch">
-            {projects.map((project, index) => (
-              <div key={project.id} className="flex h-full">
-                <ProjectCard project={project} index={index} />
-              </div>
-            ))}
+            {projects.map((project, index) => {
+              const urlArr: [string, string?][] = []
+              if (project.githubUrl) urlArr.push([project.githubUrl, "Github"])
+              if (project.videoUrl) urlArr.push([project.videoUrl, "CirclePlay"])
+              if (project.prototypeUrl) urlArr.push([project.prototypeUrl, "Box"])
+              if (project.pitchDeckUrl) urlArr.push([project.pitchDeckUrl, "Presentation"])
+              return (
+                <InfoCard
+                  key={project.id}
+                  title={project.title}
+                  subtitle={project.description}
+                  shortDescription={project.description}
+                  longDescription={project.details}
+                  skills={project.technologies}
+                  image={project.id === 1 ? "/placeholder.jpg" : undefined}
+                  url={urlArr.length > 0 ? urlArr : undefined}
+                />
+              )
+            })}
           </div>
         </section>
 
