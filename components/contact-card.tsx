@@ -3,36 +3,17 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Mail, Github, Linkedin, MessageCircle } from "lucide-react";
+import { contactInfo } from "@/app/content";
+import { Mail, Github, Linkedin } from "lucide-react";
+import type { ReactElement } from "react";
+
+const iconMap: Record<string, ReactElement> = {
+  mail: <Mail className="w-5 h-5" />,
+  github: <Github className="w-5 h-5" />,
+  linkedin: <Linkedin className="w-5 h-5" />,
+};
 
 export function ContactCard() {
-  const contactInfo = [
-    {
-      icon: <Mail className="w-5 h-5" />,
-      label: "School Email",
-      value: "gracetyy@connect.hku.hk",
-      href: "mailto:gracetyy@connect.hku.hk",
-    },
-    {
-      icon: <Mail className="w-5 h-5" />,
-      label: "Personal Email",
-      value: "tinyan.yuen@gmail.com",
-      href: "mailto:tinyan.yuen@gmail.com",
-    },
-    {
-      icon: <Linkedin className="w-5 h-5" />,
-      label: "LinkedIn",
-      value: "@gracetyy",
-      href: "https://linkedin.com/in/gracetyy",
-    },
-    {
-      icon: <Github className="w-5 h-5" />,
-      label: "GitHub",
-      value: "@gracetyy",
-      href: "https://github.com/gracetyy",
-    },
-  ];
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -89,7 +70,7 @@ export function ContactCard() {
                 >
                   <div className="flex items-center gap-4">
                     <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors duration-300">
-                      {contact.icon}
+                      {iconMap[contact.icon as keyof typeof iconMap]}
                     </div>
                     <div className="text-left">
                       <div className="font-medium">{contact.label}</div>
