@@ -19,7 +19,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { FloatingNav } from "@/components/floating-nav";
 import { Timeline } from "@/components/timeline";
-import { InfoCard } from "@/components/unified-card";
+import { InfoCard } from "@/components/info-card";
 import { ContactCard } from "@/components/contact-card";
 import { GridBackground } from "@/components/grid-background";
 import { useIsMobile } from "@/components/ui/use-mobile";
@@ -54,7 +54,7 @@ export default function Portfolio() {
         <motion.section
           ref={heroRef}
           id="home"
-          className="relative min-h-[60vh] flex flex-col items-center justify-center overflow-hidden pt-24"
+          className={`relative min-h-[60vh] flex flex-col items-center justify-center overflow-hidden pt-24 ${isMobile ? 'pb-24' : ''}`}
         >
           <GridBackground />
           <motion.div
@@ -88,7 +88,7 @@ export default function Portfolio() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-2"
+              className={`flex flex-col sm:flex-row gap-4 items-center justify-center ${isMobile ? 'mb-12' : 'mb-2'}`}
             >
               
               <Button
@@ -155,7 +155,7 @@ export default function Portfolio() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.8, delay: 1 }}
-                className="absolute inset-x-0 mx-auto bottom-2 sm:bottom-8 md:bottom-12 flex flex-col items-center z-20 select-none w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg px-2"
+                className="absolute inset-x-0 mx-auto bottom-16 sm:bottom-8 md:bottom-12 flex flex-col items-center z-20 select-none w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg px-2"
                 style={{ left: '0', right: '0', pointerEvents: 'auto', cursor: 'pointer' }}
                 onClick={() => {
                   const aboutSection = document.getElementById('about');
@@ -304,25 +304,18 @@ export default function Portfolio() {
           </motion.h2>
 
           <div className="grid md:grid-cols-2 gap-8 items-stretch">
-            {projects.map((project, index) => {
-              const urlArr: [string, string?][] = []
-              if (project.githubUrl) urlArr.push([project.githubUrl, "Github"])
-              if (project.videoUrl) urlArr.push([project.videoUrl, "CirclePlay"])
-              if (project.prototypeUrl) urlArr.push([project.prototypeUrl, "Box"])
-              if (project.pitchDeckUrl) urlArr.push([project.pitchDeckUrl, "Presentation"])
-              return (
+            {projects.map((project, index) => (
                 <InfoCard
                   key={project.id}
                   title={project.title}
-                  subtitle={project.description}
-                  shortDescription={project.description}
-                  longDescription={project.details}
-                  skills={project.technologies}
-                  image={project.id === 1 ? "/placeholder.jpg" : undefined}
-                  url={urlArr.length > 0 ? urlArr : undefined}
+                  subtitle={project.subtitle}
+                  shortDescription={project.shortDescription}
+                  longDescription={project.longDescription}
+                  skills={project.skills}
+                  url={project.links as [string, string?, string?][]}
+                  image={project.image}
                 />
-              )
-            })}
+            ))}
           </div>
         </section>
 

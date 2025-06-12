@@ -6,7 +6,7 @@ import { Calendar, Briefcase, GraduationCap, Trophy, Code, X, Triangle } from "l
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { InfoCard } from "@/components/unified-card"
+import { InfoCard } from "@/components/info-card"
 
 interface Experience {
   type: "work" | "internship" | "project" | "hackathon"
@@ -16,6 +16,8 @@ interface Experience {
   shortDescription: string // short version
   longDescription?: string | string[] // long version, optional, can be string or string[]
   skills?: string[] // new: list of skills/tools used
+  image?: string // optional image URL
+  links?: [string, string?, string?][] // optional: array of [url, display text, Lucide icon name]
 }
 
 interface TimelineProps {

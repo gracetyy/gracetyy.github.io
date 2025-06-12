@@ -17,7 +17,7 @@ export interface InfoCardProps {
   longDescription?: string | string[]
   skills?: string[]
   image?: string
-  url?: [string, string?][] // [display text, Lucide icon name]
+  url?: [string, string?, string?][] // [url, display text, Lucide icon name]
 }
 
 export function InfoCard(props: InfoCardProps) {
@@ -59,8 +59,7 @@ export function InfoCard(props: InfoCardProps) {
   // Type badge color
   const typeColor = type && type[2] ? type[2] : "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100"
 
-  // Should show type badge? Only for non-project
-  const showTypeBadge = type && type[0] && type[0] !== "Project"
+  const showTypeBadge = type && type[0]
 
   return (
     <>
@@ -74,16 +73,16 @@ export function InfoCard(props: InfoCardProps) {
             <img src={image} alt={title} className="w-full h-40 object-cover rounded mb-3" />
           )}
 
-          <div className="flex items-center gap-2 mb-2">
-            {/* Inline type badge for experience only */}
-            {showTypeBadge && (
-              <span className={`px-2 py-1 rounded-full text-xs flex items-center gap-1 pointer-events-none ${typeColor} whitespace-nowrap`}>
+          {showTypeBadge && (
+            <div className={`flex items-center gap-2 mb-3`}>
+              <div className={`px-2 py-1 rounded-full text-xs flex items-center gap-1 pointer-events-none ${typeColor} whitespace-nowrap`}>
                 {getLucideIcon(type[1])}
                 <span className="capitalize">{type[0]}</span>
-              </span>
-            )}
-            <h3 className="text-base md:text-lg font-bold text-foreground break-words m-0 p-0 leading-tight">{title}</h3>
-          </div>
+              </div>
+            </div>
+          )}
+
+          <h3 className="text-base md:text-lg font-bold text-foreground mb-2 break-words">{title}</h3>
           <h4 className="text-sm md:text-base text-muted-foreground mb-2 break-words">{subtitle}</h4>
 
           {period && (
@@ -104,24 +103,26 @@ export function InfoCard(props: InfoCardProps) {
 
           {/* Link buttons (if any) - always show */}
           {url && url.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-2">
-              {url.map(([text, icon], i) => (
+            <div className={`flex flex-col gap-2 mb-2 ${url.length > 1 ? 'sm:grid sm:grid-cols-2' : ''}`}>
+              {url.map(([linkUrl, displayText, icon], i) => (
                 <Button
-                  key={text + i}
+                  key={linkUrl + i}
                   size="sm"
                   variant="outline"
-                  onClick={e => { e.stopPropagation(); window.open(text, "_blank") }}
-                  className="flex items-center gap-1"
+                  onClick={e => { e.stopPropagation(); window.open(linkUrl, "_blank") }}
+                  className="w-full flex items-center gap-1 justify-start"
                 >
                   {getLucideIcon(icon, "w-4 h-4 mr-1")}
-                  {text}
+                  {displayText || linkUrl}
                 </Button>
               ))}
             </div>
           )}
 
-          {/* Only show shortDescription in the card */}
-          <p className="text-foreground leading-relaxed text-xs md:text-sm break-words">{shortDescription}</p>
+          {/* Only show shortDescription in the card if not expanded */}
+          {!isExpanded && (
+            <p className="text-foreground leading-relaxed text-xs md:text-sm break-words">{shortDescription}</p>
+          )}
         </CardContent>
       </Card>
 
@@ -182,22 +183,23 @@ export function InfoCard(props: InfoCardProps) {
 
                 {/* URLs (if any) */}
                 {url && url.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {url.map(([text, icon], i) => (
+                  <div className="flex flex-col gap-2 mb-4">
+                    {url.map(([linkUrl, displayText, icon], i) => (
                       <Button
-                        key={text + i}
+                        key={linkUrl + i}
                         size="sm"
                         variant="outline"
-                        onClick={() => window.open(text, "_blank")}
-                        className="flex items-center gap-1"
+                        onClick={() => window.open(linkUrl, "_blank")}
+                        className="w-full flex items-center gap-1 justify-start"
                       >
                         {getLucideIcon(icon, "w-4 h-4 mr-1")}
-                        {text}
+                        {displayText || linkUrl}
                       </Button>
                     ))}
                   </div>
                 )}
 
+                {/* Show longDescription in expanded modal */}
                 {renderLongDescription()}
               </div>
             </motion.div>
